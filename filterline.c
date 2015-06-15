@@ -1,12 +1,10 @@
 // filterline: filter file by line number.
 // http://unix.stackexchange.com/a/209470/376
 #include <stdio.h>
-#include <limits.h>
+#include <stdlib.h>
 #include <string.h>
 
 static const char *PROGRAM_VERSION = "0.1.1";
-// TODO(miku): allow this to set via env
-static const int MAX_LINE_LENGTH = LINE_MAX * 16;
 
 int main (int argc, char *argv[]) {
 
@@ -15,7 +13,8 @@ int main (int argc, char *argv[]) {
 
 	unsigned int to_print;
 	unsigned int current = 0;
-	char line[MAX_LINE_LENGTH];
+	char *line = NULL;
+	size_t len = 0;
 
 	char *VERSION = "-v";
 
@@ -27,7 +26,6 @@ int main (int argc, char *argv[]) {
 	if (argc != 3) {
 		printf("Usage: %s FILE1 FILE2\n\n", argv[0]);
 		printf("FILE1: line numbers, FILE2: input file\n");
-		printf("MAX_LINE_LENGTH=%d\n", MAX_LINE_LENGTH);
 		return 0;
 	}
 
@@ -38,11 +36,12 @@ int main (int argc, char *argv[]) {
 		return 1;
 	} else {
 		while (fscanf(L, "%u", &to_print) > 0) {
-			while (fgets(line, MAX_LINE_LENGTH, F) != NULL && ++current != to_print);
+			while (getline(&line, &len, F) != -1 && ++current != to_print);
 			if (current == to_print) {
 				printf("%s", line);
 			}
 		}
+		free(line);
 		fclose(L);
 		fclose(F);
 		return 0;

@@ -22,5 +22,5 @@ rpm: $(TARGETS)
 	./packaging/rpm/buildrpm.sh filterline
 	cp $(HOME)/rpmbuild/RPMS/x86_64/filterline*.rpm .
 
-valgrind: filterline
-	valgrind ./filterline fixtures/L fixtures/F
+valgrind: clean filterline
+	valgrind -v ./filterline fixtures/L fixtures/F
