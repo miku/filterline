@@ -7,10 +7,12 @@ Taken from [here](http://unix.stackexchange.com/questions/209404/filter-file-by-
 
 Installation: Clone and make or [packages](https://github.com/miku/filterline/releases).
 
+Line numbers must be sorted.
+
 Usage:
 
     $ filterline
-    Usage: ./filterline FILE1 FILE2
+    Usage: filterline FILE1 FILE2
 
     FILE1: line numbers, FILE2: input file
 
