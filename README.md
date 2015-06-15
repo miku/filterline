@@ -3,7 +3,7 @@ README
 
 filterline filters a file by line numbers.
 
-Taken from [here](http://unix.stackexchange.com/questions/209404/filter-file-by-line-number).
+Taken from [here](http://unix.stackexchange.com/questions/209404/filter-file-by-line-number). There's an [awk version](https://gist.github.com/miku/bc8315b10413203b31de), too.
 
 Installation: Clone and make or [packages](https://github.com/miku/filterline/releases).
 
