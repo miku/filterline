@@ -1,6 +1,6 @@
 Summary:    Filter file by line number.
 Name:       filterline
-Version:    0.1.0
+Version:    0.1.1
 Release:    0
 License:    MIT
 BuildArch:  x86_64
@@ -47,5 +47,8 @@ rm -rf %{_topdir}/BUILD/%{name}
 
 
 %changelog
+* Mon Jun 15 2015 Martin Czygan
+- 0.1.1, allow 16 * LINE_MAX lines
+
 * Mon Jun 15 2015 Martin Czygan
 - initial release

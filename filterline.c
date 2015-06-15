@@ -4,7 +4,7 @@
 #include <limits.h>
 #include <string.h>
 
-static const char *PROGRAM_VERSION = "0.1.0";
+static const char *PROGRAM_VERSION = "0.1.1";
 // TODO(miku): allow this to set via env
 static const int MAX_LINE_LENGTH = LINE_MAX * 16;
 
