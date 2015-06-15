@@ -5,6 +5,8 @@ filterline filters a file by line numbers.
 
 Taken from [here](http://unix.stackexchange.com/questions/209404/filter-file-by-line-number).
 
+Installation: Clone and make or [packages](https://github.com/miku/filterline/releases).
+
 Usage:
 
     $ filterline
