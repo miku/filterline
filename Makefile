@@ -5,6 +5,9 @@ filterline: filterline.c
 
 clean:
 	rm -f filterline
+	rm -f filterline_*.deb
+	rm -f filterline-*.rpm
+	rm -rf packaging/deb/filterline/usr
 
 deb: $(TARGETS)
 	mkdir -p packaging/deb/filterline/usr/sbin
