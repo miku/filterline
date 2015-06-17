@@ -3,3 +3,8 @@ filterline_*.deb
 filterline-*.rpm
 packaging/deb/filterline/usr/sbin/filterline
 
+# bigger fixtures
+10000000.L
+1000000000.F
+100M.F
+1M.L
