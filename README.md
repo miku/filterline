@@ -45,3 +45,15 @@ Usage:
     line 2
     line 5
     line 6
+
+Performance
+-----------
+
+Filtering out 10 million lines from a 1 billion lines file (14G) takes about a minute:
+
+    $ time filterline 10000000.L 1000000000.F > /dev/null
+    real    0m54.523s
+    user    0m37.553s
+    sys     0m8.029s
+
+A similar [awk script](https://gist.github.com/miku/bc8315b10413203b31de) takes about 2-3 times longer.
