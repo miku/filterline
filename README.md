@@ -39,3 +39,9 @@ Usage:
     line 2
     line 5
     line 6
+
+    $ filterline <(echo 1 2 5 6) fixtures/F
+    line 1
+    line 2
+    line 5
+    line 6
