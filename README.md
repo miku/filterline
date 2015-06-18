@@ -36,16 +36,18 @@ You can make this process a shell one-liner, and a reasonably fast one, too.
 
 Let's say the log entries look like this:
 
-	$ head log.ldj
-	{"id": 1, "msg": "A"}
-	{"id": 2, "msg": "B"}
-	{"id": 1, "msg": "C"}
-	{"id": 1, "msg": "D"}
-	...
+    $ head log.ldj
+    {"id": 1, "msg": "A"}
+    {"id": 2, "msg": "B"}
+    {"id": 1, "msg": "C"}
+    {"id": 1, "msg": "D"}
+    ...
 
 Let's say, `log.ldj` contains 1B entries (line numbers are at most ten digits) and you want to get the latest entry for each `id`. Utilizing [ldjtab](https://github.com/miku/ldjtab), the following will extract the ids along with the line number (padded), perform some munging and use `filterline` in the end to filter the original file:
 
-	$ filterline <(ldjtab -padlength 10 -key id log.ldj | tac | sort -u -k1,1 | cut -f2 | sed 's/^0*//' | sort -n) log.ldj > latest.ldj
+    $ filterline <(ldjtab -padlength 10 -key id log.ldj | tac | \
+                   sort -u -k1,1 | cut -f2 | sed 's/^0*//' | sort -n) \
+                   log.ldj > latest.ldj
 
 The filtered `latest.ldj` will contain the last entry for each `id` in the log.
 
@@ -56,9 +58,9 @@ There are deb and rpm [packages](https://github.com/miku/filterline/releases).
 
 To build from source:
 
-	$ git clone https://github.com/miku/filterline.git
-	$ cd filterline
-	$ make
+    $ git clone https://github.com/miku/filterline.git
+    $ cd filterline
+    $ make
 
 Usage
 -----
