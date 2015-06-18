@@ -25,7 +25,7 @@ int main (int argc, char *argv[]) {
 
 	if (argc != 3) {
 		printf("Usage: %s FILE1 FILE2\n\n", argv[0]);
-		printf("FILE1: line numbers, FILE2: input file\n");
+		printf("FILE1: line numbers (sorted, no dups), FILE2: input file\n");
 		return 0;
 	}
 
