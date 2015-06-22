@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static const char *PROGRAM_VERSION = "0.1.2";
+static const char *PROGRAM_VERSION = "0.1.3";
 
 int main (int argc, char *argv[]) {
 
