@@ -41,6 +41,7 @@ int main (int argc, char *argv[]) {
 				printf("%s", line);
 			}
 		}
+		fflush(stdout);
 		free(line);
 		fclose(L);
 		fclose(F);
