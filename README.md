@@ -156,7 +156,8 @@ $ cat 20.ldj
 {"id": "id-0", "name": "QM2"}
 ```
 
-First we extract the id values along with the line number:
+First we extract the id values along with the line number. We use a
+padlength of two, since we know file has no more than 20 lines (two digit line numbers).
 
 ```sh
 $ ldjtab -padlength 2 -key id 20.ldj
@@ -183,8 +184,7 @@ id-0    20
 ```
 
 We then reverse the order, because in the next step we want to use `uniq` -
-via `sort -u` - and we are interested in the lastest records. We use a
-padlength of two, since we know file has no more than 20 lines (two digit line numbers).
+via `sort -u` - and we are interested in the lastest records.
 
 ```sh
 $ ldjtab -padlength 2 -key id 20.ldj | tac
