@@ -185,10 +185,11 @@ id-0    20
 ```
 
 We then reverse the order, because in the next step we want to use `uniq`
-via `sort -u` and we are interested in the latest records.
+via `sort -u` and we are interested in the latest records. The ldjtab program runs in parallel and thus cannot guarantee
+order, so we need to sort the line numbers.
 
 ```sh
-$ ldjtab -padlength 2 -key id 20.ldj | tac
+$ ldjtab -padlength 2 -key id 20.ldj | sort -k2,2 | tac
 id-0    20
 id-3    19
 id-2    18
@@ -214,7 +215,7 @@ id-0    01
 We keep only keep the latest, along with the line number.
 
 ```sh
-$ ldjtab -padlength 2 -key id 20.ldj | tac | sort -u -k1,1
+$ ldjtab -padlength 2 -key id 20.ldj | sort -k2,2 | tac | sort -u -k1,1
 id-0    20
 id-1    06
 id-2    18
@@ -226,7 +227,7 @@ id-5    16
 But actually, we are only interested in the line numbers:
 
 ```sh
-$ ldjtab -padlength 2 -key id 20.ldj | tac | sort -u -k1,1 | cut -f2
+$ ldjtab -padlength 2 -key id 20.ldj | sort -k2,2 | tac | sort -u -k1,1 | cut -f2
 20
 06
 18
@@ -238,7 +239,8 @@ $ ldjtab -padlength 2 -key id 20.ldj | tac | sort -u -k1,1 | cut -f2
 And we actually prefer the unpadded version for `filterline`, so we strip leading zeros:
 
 ```sh
-$ ldjtab -padlength 2 -key id 20.ldj | tac | sort -u -k1,1 | cut -f2 | sed 's/^0*//'
+$ ldjtab -padlength 2 -key id 20.ldj | sort -k2,2 | tac | sort -u -k1,1 | cut -f2 | \
+  sed 's/^0*//'
 20
 6
 18
@@ -250,7 +252,8 @@ $ ldjtab -padlength 2 -key id 20.ldj | tac | sort -u -k1,1 | cut -f2 | sed 's/^0
 The `filterline` tool requires the file, that contains the line numbers to be sorted:
 
 ```sh
-$ ldjtab -padlength 2 -key id 20.ldj | tac | sort -u -k1,1 | cut -f2 | sed 's/^0*//' | sort -n
+$ ldjtab -padlength 2 -key id 20.ldj | sort -k2,2 | tac | sort -u -k1,1 | cut -f2 | \
+  sed 's/^0*//' | sort -n
 6
 8
 16
@@ -265,8 +268,8 @@ substitution](https://en.wikipedia.org/wiki/Process_substitution), we can write 
 one-liner:
 
 ```sh
-$ filterline <(ldjtab -padlength 2 -key id 20.ldj | tac | sort -u -k1,1 | cut -f2 | \
-               sed 's/^0*//' | sort -n) 20.ldj
+$ filterline <(ldjtab -padlength 2 -key id 20.ldj | sort -k2,2 | tac | sort -u -k1,1 | \
+               cut -f2 | sed 's/^0*//' | sort -n) 20.ldj
 {"id": "id-1", "name": "ULK"}
 {"id": "id-4", "name": "4QY"}
 {"id": "id-5", "name": "IQ1"}
