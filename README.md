@@ -28,7 +28,7 @@ The API responses can contain entries that are *new* and entries which represent
 
 > What is the current state of the data?
 
-you have to find the most recent version of each record in that log file. A typical solution would be to switch from a file to a database of sorts and do [upserts](https://wiki.postgresql.org/wiki/UPSERT#.22UPSERT.22_definition) or just updates in the NoSQL case.
+you have to find the most recent version of each record in that log file. A typical solution would be to switch from a file to a database of sorts and do some kind of [upsert](https://wiki.postgresql.org/wiki/UPSERT#.22UPSERT.22_definition).
 
 But how about logs with 100M, 500M or billions of records? And what if you do not want to run extra component, like a database?
 
@@ -65,7 +65,7 @@ To build from source:
 Usage
 -----
 
-Note that line numbers (L) must be sorted and must not contain duplicates.
+Note that line numbers (L) **must be sorted** and **must not contain duplicates**.
 
     $ filterline
     Usage: filterline FILE1 FILE2
