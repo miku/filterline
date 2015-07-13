@@ -274,3 +274,11 @@ $ filterline <(ldjtab -padlength 2 -key id 20.ldj | tac | sort -u -k1,1 | cut -f
 {"id": "id-3", "name": "S0T"}
 {"id": "id-0", "name": "QM2"}
 ```
+
+Performance data points:
+
+* The compaction of a 3.4G LDJ file with 100M records with around 5M ids takes about 12 minutes.
+
+Performance improvements (TODO):
+
+* add pure C program as drop-in replacement for ldjtab
