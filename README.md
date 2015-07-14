@@ -126,6 +126,9 @@ The filtered `latest.ldj` will contain the last entry for each `id` in the log.
 Example
 -------
 
+We use `uldjtab` to extract the values in the same order as they appear in the
+file (with `ldjtab`, we would need to use an extra `sort -k2,2` to get the same result).
+
 ```sh
 $ cd fixtures
 ```
@@ -161,27 +164,27 @@ of two, since we know the file has no more than 20 lines (two digit line
 numbers).
 
 ```sh
-$ ldjtab -padlength 2 -key id 20.ldj
-id-0    01
-id-4    02
-id-0    03
-id-3    04
-id-0    05
-id-1    06
-id-3    07
-id-4    08
-id-3    09
-id-2    10
-id-0    11
-id-5    12
-id-5    13
-id-3    14
-id-5    15
-id-5    16
-id-3    17
-id-2    18
-id-3    19
-id-0    20
+$ uldjtab -key id 20.ldj
+id-0    0000000001
+id-4    0000000002
+id-0    0000000003
+id-3    0000000004
+id-0    0000000005
+id-1    0000000006
+id-3    0000000007
+id-4    0000000008
+id-3    0000000009
+id-2    0000000010
+id-0    0000000011
+id-5    0000000012
+id-5    0000000013
+id-3    0000000014
+id-5    0000000015
+id-5    0000000016
+id-3    0000000017
+id-2    0000000018
+id-3    0000000019
+id-0    0000000020
 ```
 
 We then reverse the order, because in the next step we want to use `uniq`
@@ -189,58 +192,57 @@ via `sort -u` and we are interested in the latest records. The ldjtab program ru
 order, so we need to sort the line numbers.
 
 ```sh
-$ ldjtab -padlength 2 -key id 20.ldj | sort -k2,2 | tac
-id-0    20
-id-3    19
-id-2    18
-id-3    17
-id-5    16
-id-5    15
-id-3    14
-id-5    13
-id-5    12
-id-0    11
-id-2    10
-id-3    09
-id-4    08
-id-3    07
-id-1    06
-id-0    05
-id-3    04
-id-0    03
-id-4    02
-id-0    01
+$ uldjtab -key id 20.ldj | tac
+id-0    0000000020
+id-3    0000000019
+id-2    0000000018
+id-3    0000000017
+id-5    0000000016
+id-5    0000000015
+id-3    0000000014
+id-5    0000000013
+id-5    0000000012
+id-0    0000000011
+id-2    0000000010
+id-3    0000000009
+id-4    0000000008
+id-3    0000000007
+id-1    0000000006
+id-0    0000000005
+id-3    0000000004
+id-0    0000000003
+id-4    0000000002
+id-0    0000000001
 ```
 
 We keep only keep the latest, along with the line number.
 
 ```sh
-$ ldjtab -padlength 2 -key id 20.ldj | sort -k2,2 | tac | sort -u -k1,1
-id-0    20
-id-1    06
-id-2    18
-id-3    19
-id-4    08
-id-5    16
+$ ldjtab -padlength 2 -key id 20.ldj | tac | sort -u -k1,1
+id-0    0000000020
+id-1    0000000006
+id-2    0000000018
+id-3    0000000019
+id-4    0000000008
+id-5    0000000016
 ```
 
 But actually, we are only interested in the line numbers:
 
 ```sh
-$ ldjtab -padlength 2 -key id 20.ldj | sort -k2,2 | tac | sort -u -k1,1 | cut -f2
-20
-06
-18
-19
-08
-16
+$ uldjtab -key id 20.ldj | tac | sort -u -k1,1 | cut -f2
+0000000020
+0000000006
+0000000018
+0000000019
+0000000008
+0000000016
 ```
 
 And we actually prefer the unpadded version for `filterline`, so we strip leading zeros:
 
 ```sh
-$ ldjtab -padlength 2 -key id 20.ldj | sort -k2,2 | tac | sort -u -k1,1 | cut -f2 | \
-  sed 's/^0*//'
+$ uldjtab -key id 20.ldj | tac | sort -u -k1,1 | cut -f2 | sed 's/^0*//'
 20
 6
 18
@@ -252,8 +254,7 @@ $ ldjtab -padlength 2 -key id 20.ldj | sort -k2,2 | tac | sort -u -k1,1 | cut -f
 The `filterline` tool requires the file, that contains the line numbers to be sorted:
 
 ```sh
-$ ldjtab -padlength 2 -key id 20.ldj | sort -k2,2 | tac | sort -u -k1,1 | cut -f2 | \
-  sed 's/^0*//' | sort -n
+$ uldjtab -key id 20.ldj | tac | sort -u -k1,1 | cut -f2 | sed 's/^0*//' | sort -n
 6
 8
 16
@@ -268,8 +269,8 @@ substitution](https://en.wikipedia.org/wiki/Process_substitution), we can write 
 one-liner:
 
 ```sh
-$ filterline <(ldjtab -padlength 2 -key id 20.ldj | sort -k2,2 | tac | sort -u -k1,1 | \
-               cut -f2 | sed 's/^0*//' | sort -n) 20.ldj
+$ filterline <(uldjtab -key id 20.ldj | tac | sort -u -k1,1 | cut -f2 | \
+               sed 's/^0*//' | sort -n) 20.ldj
 {"id": "id-1", "name": "ULK"}
 {"id": "id-4", "name": "4QY"}
 {"id": "id-5", "name": "IQ1"}
