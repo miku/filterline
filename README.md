@@ -280,8 +280,11 @@ $ filterline <(ldjtab -padlength 2 -key id 20.ldj | sort -k2,2 | tac | sort -u -
 
 Performance data points:
 
-* The compaction of a 3.4G LDJ file with 100M records with around 5M ids takes about 12 minutes.
+* The [compaction](https://gist.github.com/miku/b586c4bfe650d5456851) of a 3.4G LDJ file with 100M records with around 5M ids takes about 8 minutes.
 
 Performance improvements (TODO):
 
 * add pure C program as drop-in replacement for ldjtab
+
+    This is partially addressed by [uldjtab](https://github.com/miku/ldjtab/blob/master/cmd/uldjtab/main.go), which uses
+    a more performant [JSON deserializer](https://github.com/mreiferson/go-ujson).
