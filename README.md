@@ -1,12 +1,10 @@
-README
-======
+# README
 
 filterline filters a file by line numbers.
 
 Taken from [here](http://unix.stackexchange.com/questions/209404/filter-file-by-line-number). There's an [awk version](https://gist.github.com/miku/bc8315b10413203b31de), too.
 
-Installation
-------------
+## Installation
 
 There are deb and rpm [packages](https://github.com/miku/filterline/releases).
 
@@ -16,8 +14,7 @@ To build from source:
     $ cd filterline
     $ make
 
-Usage
------
+## Usage
 
 Note that line numbers (L) **must be sorted** and **must not contain duplicates**.
 
@@ -56,20 +53,21 @@ Note that line numbers (L) **must be sorted** and **must not contain duplicates*
     line 5
     line 6
 
-Performance
------------
+## Performance
 
-Filtering out 10 million lines from a 1 billion lines file (14G) takes about a minute:
+Filtering out 10 million lines from a 1 billion lines file (14G) takes about 33
+seconds (dropped caches, i7-2620M):
 
     $ time filterline 10000000.L 1000000000.F > /dev/null
-    real    0m54.523s
-    user    0m37.553s
-    sys     0m8.029s
+    real    0m33.434s
+    user    0m25.334s
+    sys     0m5.920s
 
 A similar [awk script](https://gist.github.com/miku/bc8315b10413203b31de) takes about 2-3 times longer.
 
-Use case: data compaction
--------------------------
+----
+
+## Use case: data compaction
 
 One use case for such a filter is *data compaction*. Imagine that you harvest
 an API every day and you keep the JSON responses in a log.
@@ -123,8 +121,7 @@ Let's say, `log.ldj` contains 1B entries (line numbers are at most ten digits) a
 
 The filtered `latest.ldj` will contain the last entry for each `id` in the log.
 
-Example
--------
+## Example
 
 We use `uldjtab` to extract the values in the same order as they appear in the
 file (with `ldjtab`, we would need to use an extra `sort -k2,2` to get the same result).
