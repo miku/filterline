@@ -50,6 +50,8 @@ int main(int argc, char* argv[])
     if (argc != 3 && argc != 4) {
         printf("Usage: %s [-v] FILE1 FILE2\n\n", argv[0]);
         printf("FILE1: line numbers (sorted, no dups, one-based), FILE2: input file\n");
+        printf("-v : print all lines in F not named in L (invert)\n");
+        printf("-V : print version and exit\n");
         return 0;
     }
 
