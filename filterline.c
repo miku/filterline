@@ -25,47 +25,71 @@
 #include <stdlib.h>
 #include <string.h>
 
-static const char *PROGRAM_VERSION = "0.1.3";
+static const char* PROGRAM_VERSION = "0.1.3";
 
-int main (int argc, char *argv[]) {
+int main(int argc, char* argv[])
+{
 
-	FILE *L;
-	FILE *F;
+    FILE* L;
+    FILE* F;
 
-	unsigned int to_print;
-	unsigned int current = 0;
-	char *line = NULL;
-	size_t len = 0;
+    unsigned int to_print;
+    unsigned int current = 0;
+    int invertMatches = 0; // 0 = keep lines in L, 1 = drop lines in L.
+    char* line = NULL;
+    size_t len = 0;
 
-	char *VERSION = "-v";
+    char* VERSION = "-V";
+    char* flagInvert = "-v";
 
-	if (argc == 2 && strcmp(argv[1], VERSION) == 0) {
-		printf("%s\n", PROGRAM_VERSION);
-		return 0;
-	}
+    if (argc == 2 && strcmp(argv[1], VERSION) == 0) {
+        printf("%s\n", PROGRAM_VERSION);
+        return 0;
+    }
 
-	if (argc != 3) {
-		printf("Usage: %s FILE1 FILE2\n\n", argv[0]);
-		printf("FILE1: line numbers (sorted, no dups, one-based), FILE2: input file\n");
-		return 0;
-	}
+    if (argc != 3 && argc != 4) {
+        printf("Usage: %s [-v] FILE1 FILE2\n\n", argv[0]);
+        printf("FILE1: line numbers (sorted, no dups, one-based), FILE2: input file\n");
+        return 0;
+    }
 
-	if ((L = fopen(argv[1], "r")) == NULL) {
-		return 1;
-	} else if ((F = fopen(argv[2], "r")) == NULL) {
-		fclose(L);
-		return 1;
-	} else {
-		while (fscanf(L, "%u", &to_print) > 0) {
-			while (getline(&line, &len, F) != -1 && ++current != to_print);
-			if (current == to_print) {
-				printf("%s", line);
-			}
-		}
-		fflush(stdout);
-		free(line);
-		fclose(L);
-		fclose(F);
-		return 0;
-	}
+    char* lfile = argv[1];
+    char* ffile = argv[2];
+
+    if (argc == 4 && strcmp(argv[1], flagInvert) == 0) {
+        invertMatches = 1;
+        lfile = argv[2];
+        ffile = argv[3];
+    }
+
+    if ((L = fopen(lfile, "r")) == NULL) {
+        return 1;
+    } else if ((F = fopen(ffile, "r")) == NULL) {
+        fclose(L);
+        return 1;
+    } else {
+        if (invertMatches == 0) {
+            while (fscanf(L, "%u", &to_print) > 0) {
+                while (getline(&line, &len, F) != -1 && ++current != to_print)
+                    ;
+                if (current == to_print) {
+                    printf("%s", line);
+                }
+            }
+        } else {
+            while (fscanf(L, "%u", &to_print) > 0) {
+                while (getline(&line, &len, F) != -1 && ++current != to_print)
+                    printf("%s", line);
+                    ;
+            }
+            while (getline(&line, &len, F) != -1)
+                printf("%s", line);
+                ;
+        }
+        fflush(stdout);
+        free(line);
+        fclose(L);
+        fclose(F);
+        return 0;
+    }
 }
