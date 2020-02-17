@@ -53,6 +53,16 @@ Note that line numbers (L) **must be sorted** and **must not contain duplicates*
     line 5
     line 6
 
+Since 0.1.4, there is an `-v` flag to "invert" matches.
+
+    $ filterline -v <(echo 1 2 5 6) fixtures/F
+    line 3
+    line 4
+    line 7
+    line 8
+    line 9
+    line 10
+
 ## Performance
 
 Filtering out 10 million lines from a 1 billion lines file (14G) takes about 33
