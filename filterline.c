@@ -82,11 +82,11 @@ int main(int argc, char* argv[])
             while (fscanf(L, "%u", &to_print) > 0) {
                 while (getline(&line, &len, F) != -1 && ++current != to_print)
                     printf("%s", line);
-                    ;
+                ;
             }
             while (getline(&line, &len, F) != -1)
                 printf("%s", line);
-                ;
+            ;
         }
         fflush(stdout);
         free(line);

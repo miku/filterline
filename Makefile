@@ -1,10 +1,11 @@
+SHELL = /bin/bash
 TARGETS = filterline
 
 filterline: filterline.c
 	cc -Wall -xc -O3 -o filterline filterline.c
 
 .PHONY: format
-format:
+fmt:
 	clang-format -i -style WebKit filterline.c
 
 .PHONY: clean
