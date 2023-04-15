@@ -27,9 +27,8 @@
 
 static const char* PROGRAM_VERSION = "0.1.4";
 
-int main(int argc, char* argv[])
+int main(int argc, const char* argv[])
 {
-
     FILE* L;
     FILE* F;
 
@@ -39,14 +38,13 @@ int main(int argc, char* argv[])
     char* line = NULL;
     size_t len = 0;
 
-    char* VERSION = "-V";
-    char* flagInvert = "-v";
+    const char* VERSION = "-V";
+    const char* flagInvert = "-v";
 
     if (argc == 2 && strcmp(argv[1], VERSION) == 0) {
         printf("%s\n", PROGRAM_VERSION);
         return 0;
     }
-
     if (argc != 3 && argc != 4) {
         printf("Usage: %s [-v] FILE1 FILE2\n\n", argv[0]);
         printf("FILE1: line numbers (sorted, no dups, one-based), FILE2: input file\n");
@@ -55,15 +53,14 @@ int main(int argc, char* argv[])
         return 0;
     }
 
-    char* lfile = argv[1];
-    char* ffile = argv[2];
+    const char* lfile = argv[1];
+    const char* ffile = argv[2];
 
     if (argc == 4 && strcmp(argv[1], flagInvert) == 0) {
         invertMatches = 1;
         lfile = argv[2];
         ffile = argv[3];
     }
-
     if ((L = fopen(lfile, "r")) == NULL) {
         return 1;
     } else if ((F = fopen(ffile, "r")) == NULL) {
