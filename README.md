@@ -127,10 +127,10 @@ $ filterline L <(zstd -d -c -T0 data.ndj.zst) | zstd -c -T0 > snapshot.ndj.zst
 
              ^                  ^                             ^
              |                  |                             |
-       lines to keep       ~4B+ messages, 1T+             latest versions, ~140M
+       lines to keep       ~1B+ records, 4T+             latest versions, ~140M records
 ```
 
-Crunching through ~4B messages takes about 65 minutes, about 1M messages/s.
+Crunching through ~1B messages takes about 65 minutes, about 1GB/s.
 
 > Look, ma, just [files](http://www.catb.org/~esr/writings/taoup/html/ch01s06.html).
 
