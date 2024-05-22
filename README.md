@@ -123,7 +123,7 @@ single snapshot, via
 [details](https://github.com/datasets/awesome-data/issues/284#issuecomment-405089255)):
 
 ```shell
-$ filterline L <(zstd -d -c -T0 data.ndj.zst) | zstd -c -T0 > snapshot.ndj.zst
+$ filterline L <(zstd -dc -T0 data.ndj.zst) | zstd -c -T0 > snapshot.ndj.zst
 
              ^                  ^                             ^
              |                  |                             |
