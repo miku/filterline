@@ -1,7 +1,7 @@
 /filterline
 filterline_*.deb
 filterline-*.rpm
-packaging/deb/filterline/usr/sbin/filterline
+packaging/deb/filterline/usr/local/bin/filterline
 
 # bigger fixtures
 10000000.*L*
