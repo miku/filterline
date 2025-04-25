@@ -17,8 +17,8 @@ clean:
 
 .PHONY: deb
 deb: $(TARGETS)
-	mkdir -p packaging/deb/filterline/usr/sbin
-	cp $(TARGETS) packaging/deb/filterline/usr/sbin
+	mkdir -p packaging/deb/filterline/usr/local/bin
+	cp $(TARGETS) packaging/deb/filterline/usr/local/bin
 	cd packaging/deb && fakeroot dpkg-deb --build filterline .
 	mv packaging/deb/filterline_*.deb .
 
