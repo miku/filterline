@@ -25,7 +25,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static const char* PROGRAM_VERSION = "0.1.5";
+static const char* PROGRAM_VERSION = "0.1.6";
 
 int main(int argc, const char* argv[])
 {
