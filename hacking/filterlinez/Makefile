@@ -7,3 +7,4 @@ zig-out/bin/filterlinez:
 .PHONY: clean
 clean:
 	rm -rf zig-out
+	rm -rf .zig-cache
