@@ -7,7 +7,7 @@ filterline: filterline.c
 
 .PHONY: format
 fmt:
-	clang-format -i -style WebKit filterline.c
+	clang-format -i -style="{BasedOnStyle: WebKit, IndentWidth: 4}" filterline.c
 
 .PHONY: clean
 clean:
