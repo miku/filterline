@@ -27,7 +27,7 @@
 
 #define BUFFER_SIZE (1024 * 1024) // 1 MB buffer
 
-static const char *PROGRAM_VERSION = "0.1.6";
+static const char *PROGRAM_VERSION = "0.1.7";
 
 int main(int argc, const char *argv[]) {
   FILE *L;

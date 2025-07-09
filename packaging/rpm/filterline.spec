@@ -1,6 +1,6 @@
 Summary:    Filter file by line number.
 Name:       filterline
-Version:    0.1.6
+Version:    0.1.7
 Release:    0
 License:    MIT
 BuildArch:  x86_64
