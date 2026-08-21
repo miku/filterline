@@ -1,4 +1,7 @@
 /filterline
+hacking/filterline-fast/filterline-fast
+hacking/filterline-fast/filterline-fast-san
+hacking/filterline-fast/*.dSYM
 filterline_*.deb
 filterline-*.rpm
 packaging/deb/filterline/usr/local/bin/filterline
